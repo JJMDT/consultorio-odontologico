@@ -1,0 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+.main-content {
+    margin-left: 250px; /* Mueve el contenido para que no quede debajo del sidebar */
+    width: 100%; /* Ocupa todo el ancho disponible */
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    background-color: #f1f2f6; /* Color de fondo */
+    font-family: 'Roboto', sans-serif; /* Fuente de texto */
+    font-family: 'poppins', sans-serif; /* Fuente de texto */
+}
