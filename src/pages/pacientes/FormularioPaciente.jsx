@@ -12,6 +12,8 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
+import { agregarPaciente } from "../../service/PacienteService";
+
 
 const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
   const [formData, setFormData] = useState({
@@ -23,6 +25,8 @@ const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
     ciudad: "",
     provincia: "",
   });
+
+  const [loading, setLoading] = useState(false);
 
   const provincias = [
     "Buenos Aires",
@@ -51,15 +55,17 @@ const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
   ];
 
   useEffect(() => {
-    setFormData({
-      nombre: "",
-      apellido: "",
-      dni: "",
-      telefono: "",
-      direccion: "",
-      ciudad: "",
-      provincia: "",
-    });
+    if(openDialog){
+      setFormData({
+        nombre: "",
+        apellido: "",
+        dni: "",
+        telefono: "",
+        direccion: "",
+        ciudad: "",
+        provincia: "",
+      });
+    }
   }, [openDialog]);
 
   const handleChange = (event) => {
@@ -70,10 +76,21 @@ const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
     }));
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Datos del paciente:", formData);
-    handleCloseDialog();
+    setLoading(true)
+    try {
+        await agregarPaciente(formData);
+        console.log("paciente agregado")
+        handleCloseDialog();
+
+    } catch (error) {
+        console.error("Error al agregar paciente", error)
+
+    } finally {
+        setLoading(false)
+    }
   };
 
   return (
@@ -177,8 +194,9 @@ const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
 
             <Grid item xs={12}>
               <DialogActions>
-                <Button type="submit" variant="contained" color="primary">
-                  Agregar
+                <Button type="submit" variant="contained" color="primary" disabled={loading}>
+                  {loading ? "Agregando..." : "Agregar"}
+                  
                 </Button>
                 <Button
                   onClick={handleCloseDialog}

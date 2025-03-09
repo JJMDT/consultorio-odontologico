@@ -11,7 +11,7 @@ const Pacientes = () => {
       {/* Usa el componente Header con el título "Pacientes" */}
       <Header title="Pacientes" />
       <Tools />
-      <TablaPacientes />
+      {/* <TablaPacientes /> */}
     </div>
   );
 };
