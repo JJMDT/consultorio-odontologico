@@ -59,7 +59,7 @@ const DetalleHistoria = () => {
             <Button
               variant="outlined"
               color="primary"
-              onClick={() => navigate("/pacientes")}
+              onClick={() => navigate(-1)}
               className="back-button"
             >
               ⬅ Volver

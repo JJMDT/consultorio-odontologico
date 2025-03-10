@@ -21,7 +21,7 @@ import Button from "@mui/material/Button";
 const TablaPacientes = ({ filtro }) => {
   const [pacientes, setPacientes] = useState([]);
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
   const navigate = useNavigate();
 
   // Cargar pacientes desde Firebase (Filtrar por nombre o dni si es necesario)
@@ -49,7 +49,7 @@ const TablaPacientes = ({ filtro }) => {
           };
         }).sort((a, b) => b.createdAt - a.createdAt); // Ordenar por fecha de creación si está presente
 
-        console.log(pacientesData); // Verifica los datos que llegan de Firebase
+        //console.log(pacientesData); // Verifica los datos que llegan de Firebase
         setPacientes(pacientesData);
       });
 
@@ -78,7 +78,7 @@ const TablaPacientes = ({ filtro }) => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 20));
     setPage(0);
   };
 
@@ -136,7 +136,7 @@ const TablaPacientes = ({ filtro }) => {
         </TableContainer>
 
         <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
+          rowsPerPageOptions={[10, 20, 30]}
           component="div"
           count={pacientesFiltrados.length}
           rowsPerPage={rowsPerPage}

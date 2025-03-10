@@ -21,13 +21,22 @@ const Historias = () => {
 
   // Estado para la paginación
   const [page, setPage] = useState(0);
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   useEffect(() => {
     const fetchHistorias = async () => {
       setLoading(true);
       const data = await getTodasLasHistoriasClinicas();
+      // Ordenar las historias por fecha
+      data.sort((a, b) => {
+        const fechaA = a.fecha?.seconds ? new Date(a.fecha.seconds * 1000) : new Date(0);
+        const fechaB = b.fecha?.seconds ? new Date(b.fecha.seconds * 1000) : new Date(0);
+        return fechaB - fechaA; // Ordena de más reciente a más antigua
+      });
       setHistorias(data);
+      // Mostrar solo las primeras 10 historias
+      //setHistorias(data.slice(0, 10));
+
       setLoading(false);
     };
     fetchHistorias();
@@ -38,7 +47,7 @@ const Historias = () => {
   };
 
   const handleChangeRowsPerPage = (event) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
+    setRowsPerPage(parseInt(event.target.value, 20));
     setPage(0);
   };
 
@@ -46,7 +55,7 @@ const Historias = () => {
     <Box sx={{ padding: 2 }}>
       <Header title="Todas las historias" />
       <Paper sx={{ padding: 2 }}>
-        <Typography variant="h6">Historias Clínicas</Typography>
+        <Typography variant="h6">Últimas Consultas</Typography>
         {/* Verifica si los datos están cargando o si no hay historias */}
         {loading ? (
           <Typography>Cargando...</Typography>
@@ -60,6 +69,7 @@ const Historias = () => {
                   <TableRow>
                     <TableCell>Fecha</TableCell>
                     <TableCell>Paciente</TableCell>
+                    <TableCell>Motivo</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -77,6 +87,9 @@ const Historias = () => {
                             {historia.pacienteId || "ID paciente no disponible"}
                           </Link>
                         </TableCell>
+                        <TableCell>
+                            {historia.motivo || "Motivo no disponible"}
+                        </TableCell>
                       </TableRow>
                     ))}
                 </TableBody>
@@ -85,7 +98,7 @@ const Historias = () => {
 
             {/* Agregar la funcionalidad de paginación */}
             <TablePagination
-              rowsPerPageOptions={[5, 10, 25]}
+              rowsPerPageOptions={[10, 20, 30]}
               component="div"
               count={historias.length}
               rowsPerPage={rowsPerPage}

@@ -1,4 +1,4 @@
-import { getDocs, collection, query, limit, orderBy } from "firebase/firestore";
+import { getDocs, collection, query, limit, orderBy,addDoc } from "firebase/firestore";
 import { db } from "../../firebase";
 
 // Obtener historia clínica
@@ -48,7 +48,7 @@ export const getTodasLasHistoriasClinicas = async () => {
         const historiaQuery = query(
           historiaRef, 
           orderBy("fecha", "desc"), // Asegúrate de tener un campo 'fecha' para ordenar
-          limit(5)  // Limita la cantidad de historias a las últimas 5
+          limit(6)  // Limita la cantidad de historias a las últimas 5
         );
 
         const historiaSnapshot = await getDocs(historiaQuery);
@@ -78,5 +78,28 @@ export const getTodasLasHistoriasClinicas = async () => {
   } catch (error) {
     console.error("Error al obtener todas las historias clínicas:", error);
     return [];
+  }
+};
+
+export const addHistoriaClinica = async (
+  pacienteId,
+  historiaData
+) => {
+  if (!pacienteId) {
+    console.error("El ID del paciente es obligatorio.");
+    return;
+  }
+
+  try {
+    const historiaRef = collection(db, `pacientes/${pacienteId}/historia_clinica`);
+    // Añadimos la historia clínica al paciente
+    await addDoc(historiaRef, {
+      ...historiaData,
+      fecha: historiaData.fecha , // Si no se proporciona fecha, se asigna la actual
+    });
+    console.log(`Historia clínica añadida para el paciente ${pacienteId}`);
+  } catch (error) {
+    console.error("Error al añadir historia clínica:", error);
+    throw error;
   }
 };

@@ -6,18 +6,28 @@ import { FaUser } from "react-icons/fa";
 import { GrConfigure } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
 import {Box,Paper} from "@mui/material";
+import logo from '../assets/logo.webp';
 // import EventNoteIcon from '@mui/icons-material/EventNote';
 
 const Navbar = () => {
     return (
       <header>
         
-        <h1>Consultorio</h1>
+        <Link
+        to="/"
+        style={{
+          display: "flex", // Usa Flexbox
+          alignItems: "center", // Centra verticalmente
+          gap: "8px", // Espacio entre el ícono y el texto
+          textDecoration: "none", // Quita el subrayado del enlace
+        }}>
+          <img src={logo} alt="logo" className='logo' />
+        </Link>
         <nav className="navbar">
           <ul>
             <li>
               <Link
-                to="/"
+                to="/nueva-consulta"
                 style={{
                   display: "flex", // Usa Flexbox
                   alignItems: "center", // Centra verticalmente
@@ -25,7 +35,7 @@ const Navbar = () => {
                   textDecoration: "none", // Quita el subrayado del enlace
                 }}
                 >
-                <FaHome /> Inicio
+                <IoMdPulse /> Consulta
               </Link>
             </li>
             <li>

@@ -6,6 +6,7 @@ import Historias from './pages/historia-clinica/Historias';
 import DetallePaciente from './pages/pacientes/DetallePaciente';
 import './App.css'
 import DetalleHistoria from './pages/historia-clinica/DetalleHistoria';
+import NuevaConsulta from './pages/consulta/NuevaConsulta';
 
 
 
@@ -16,8 +17,9 @@ function App() {
       <div className="main-content">
         <Routes>
           <Route path="/" element={<Dashboard />} />
+          <Route path="/nueva-consulta" element={<NuevaConsulta />} />
           <Route path="/pacientes" element={<Pacientes />} />
-          <Route path="/Historias" element={<Historias />} />
+          <Route path="/historias" element={<Historias />} />
           <Route path="/paciente/:id" element={<DetallePaciente />} />
           <Route path='/historia-clinica/:id' element={<DetalleHistoria />} />
 
