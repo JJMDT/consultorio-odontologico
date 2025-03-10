@@ -15,6 +15,8 @@ import { collection, getDocs, query, where, onSnapshot } from "firebase/firestor
 import { db } from "../../../firebase";
 import LibraryBooksIcon from "@mui/icons-material/LibraryBooks";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
 const TablaPacientes = ({ filtro }) => {
   const [pacientes, setPacientes] = useState([]);
@@ -99,19 +101,26 @@ const TablaPacientes = ({ filtro }) => {
                   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                   .map((paciente) => (
                     <TableRow key={paciente.id}>
-                      <TableCell>{paciente.nombre || "No disponible"}</TableCell>
+                      <TableCell>
+                        {paciente.nombre || "No disponible"}
+                      </TableCell>
                       <TableCell align="left">
                         {paciente.apellido || "No disponible"}
                       </TableCell>
-                      <TableCell align="left">{paciente.dni || "No disponible"}</TableCell>
+                      <TableCell align="left">
+                        {paciente.dni || "No disponible"}
+                      </TableCell>
                       <TableCell align="center">
-                        <IconButton
-                          color="primary"
-                          aria-label="ver paciente"
-                          onClick={() => navigate(`/detalle-paciente/${paciente.id}`)} // Ruta para detalle
-                        >
-                          <LibraryBooksIcon />
-                        </IconButton>
+                        <Link to={`/paciente/${paciente.id}`}>
+                          <Button variant="outlined" color="primary" sx={{ marginRight: 1 }}>
+                            Ver Detalles
+                          </Button>
+                        </Link>
+                        <Link to={`/historia-clinica/${paciente.id}`}>
+                          <Button variant="outlined" color="secondary" sx={{ marginRight: 1 }}>
+                            Ver Historial
+                          </Button>
+                        </Link>
                       </TableCell>
                     </TableRow>
                   ))

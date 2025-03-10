@@ -5,11 +5,13 @@ import { IoMdPulse } from "react-icons/io";
 import { FaUser } from "react-icons/fa";
 import { GrConfigure } from "react-icons/gr";
 import { FaHome } from "react-icons/fa";
+import {Box,Paper} from "@mui/material";
 // import EventNoteIcon from '@mui/icons-material/EventNote';
 
 const Navbar = () => {
     return (
       <header>
+        
         <h1>Consultorio</h1>
         <nav className="navbar">
           <ul>
@@ -22,7 +24,7 @@ const Navbar = () => {
                   gap: "8px", // Espacio entre el ícono y el texto
                   textDecoration: "none", // Quita el subrayado del enlace
                 }}
-              >
+                >
                 <FaHome /> Inicio
               </Link>
             </li>
@@ -35,7 +37,7 @@ const Navbar = () => {
                   gap: "8px", // Espacio entre el ícono y el texto
                   textDecoration: "none", // Quita el subrayado del enlace
                 }}
-              >
+                >
                 <FaUser /> Pacientes
               </Link>
             </li>
@@ -48,7 +50,7 @@ const Navbar = () => {
                   gap: "8px", // Espacio entre el ícono y el texto
                   textDecoration: "none", // Quita el subrayado del enlace
                 }}
-              >
+                >
                 <IoMdPulse />Historias 
               </Link>
             </li>

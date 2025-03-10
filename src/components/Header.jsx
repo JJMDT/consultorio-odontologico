@@ -1,7 +1,7 @@
 // Header.js
 import React from 'react';
 import '../styles/HeaderComponent.css';
-const Header = ({ title }) => {
+const Header = ({ title , subtitulo}) => {
   return (
     <div className="portada">
       <div className="container">

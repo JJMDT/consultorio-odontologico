@@ -13,6 +13,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { agregarPaciente } from "../../service/PacienteService";
+import provincias from "./provincias"
 
 
 const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
@@ -27,32 +28,6 @@ const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
   });
 
   const [loading, setLoading] = useState(false);
-
-  const provincias = [
-    "Buenos Aires",
-    "Catamarca",
-    "Chaco",
-    "Chubut",
-    "Córdoba",
-    "Corrientes",
-    "Entre Ríos",
-    "Formosa",
-    "Jujuy",
-    "La Pampa",
-    "La Rioja",
-    "Mendoza",
-    "Misiones",
-    "Neuquén",
-    "Río Negro",
-    "Salta",
-    "San Juan",
-    "San Luis",
-    "Santa Cruz",
-    "Santa Fe",
-    "Santiago del Estero",
-    "Tierra del Fuego",
-    "Tucumán",
-  ];
 
   useEffect(() => {
     if(openDialog){
@@ -84,6 +59,7 @@ const FormularioPaciente = ({ openDialog, handleCloseDialog }) => {
         await agregarPaciente(formData);
         console.log("paciente agregado")
         handleCloseDialog();
+        cargarPacientes();
 
     } catch (error) {
         console.error("Error al agregar paciente", error)
